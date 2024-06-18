@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище StatementDatebaseModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Login" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Birthday" Type="date" Nullable="false" />
+    <Property Name="IDRole" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ClientStatements">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDClient" Type="int" Nullable="false" />
+    <Property Name="IDStatement" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="IDRole" Type="int" Nullable="false" />
+    <Property Name="Login" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="StatemementComments">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StatementID" Type="int" />
+    <Property Name="Comment" Type="nvarchar" MaxLength="300" />
+    <Property Name="CommentAuthorID" Type="int" />
+    <Property Name="CommentTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Statement">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StartTime" Type="datetime" Nullable="false" />
+    <Property Name="StatusID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Status">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Login" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="RoleID" Type="int" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserStatements">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserID" Type="int" Nullable="false" />
+    <Property Name="StatementID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_ClientStatements_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="ClientStatements" Type="Self.ClientStatements" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ClientStatements">
+        <PropertyRef Name="IDClient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StatemementComments_Statement">
+    <End Role="Statement" Type="Self.Statement" Multiplicity="0..1" />
+    <End Role="StatemementComments" Type="Self.StatemementComments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Statement">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StatemementComments">
+        <PropertyRef Name="StatementID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StatemementComments_User1">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="StatemementComments" Type="Self.StatemementComments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="StatemementComments">
+        <PropertyRef Name="CommentAuthorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Statement_Status">
+    <End Role="Status" Type="Self.Status" Multiplicity="1" />
+    <End Role="Statement" Type="Self.Statement" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Status">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Statement">
+        <PropertyRef Name="StatusID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_User_Role">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserStatements_Statement">
+    <End Role="Statement" Type="Self.Statement" Multiplicity="1" />
+    <End Role="UserStatements" Type="Self.UserStatements" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Statement">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserStatements">
+        <PropertyRef Name="StatementID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserStatements_User">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="UserStatements" Type="Self.UserStatements" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="UserStatements">
+        <PropertyRef Name="UserID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище StatementDatebaseModelContainer">
+    <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ClientStatements" EntityType="Self.ClientStatements" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StatemementComments" EntityType="Self.StatemementComments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Statement" EntityType="Self.Statement" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserStatements" EntityType="Self.UserStatements" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ClientStatements_Client" Association="Self.FK_ClientStatements_Client">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="ClientStatements" EntitySet="ClientStatements" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StatemementComments_Statement" Association="Self.FK_StatemementComments_Statement">
+      <End Role="Statement" EntitySet="Statement" />
+      <End Role="StatemementComments" EntitySet="StatemementComments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StatemementComments_User1" Association="Self.FK_StatemementComments_User1">
+      <End Role="User" EntitySet="User" />
+      <End Role="StatemementComments" EntitySet="StatemementComments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Statement_Status" Association="Self.FK_Statement_Status">
+      <End Role="Status" EntitySet="Status" />
+      <End Role="Statement" EntitySet="Statement" />
+    </AssociationSet>
+    <AssociationSet Name="FK_User_Role" Association="Self.FK_User_Role">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserStatements_Statement" Association="Self.FK_UserStatements_Statement">
+      <End Role="Statement" EntitySet="Statement" />
+      <End Role="UserStatements" EntitySet="UserStatements" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserStatements_User" Association="Self.FK_UserStatements_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserStatements" EntitySet="UserStatements" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
