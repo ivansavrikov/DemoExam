@@ -65,9 +65,16 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Core\DatabaseContext.cs" />
+    <Compile Include="Views\AddEditStatement.xaml.cs">
+      <DependentUpon>AddEditStatement.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SearchingStatementsWindow.xaml.cs">
       <DependentUpon>SearchingStatementsWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Views\AddEditStatement.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

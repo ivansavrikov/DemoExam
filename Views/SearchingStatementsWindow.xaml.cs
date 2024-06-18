@@ -21,7 +21,6 @@ namespace StatementApp.Views
         {
             InitializeComponent();
             List<Statement> statements = GetStatementsList(user);
-            MessageBox.Show($"{statements.Count}");
             lvStatements.ItemsSource = statements;
         }
 
@@ -33,7 +32,6 @@ namespace StatementApp.Views
                 case "Client":
                     foreach(UserStatements us in user.UserStatements)
                     {
-                        MessageBox.Show($"{us.Statement.ID}");
                         statementsList.Add(us.Statement);
                     }
                     break;
@@ -54,6 +52,12 @@ namespace StatementApp.Views
             }
 
             return statementsList;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            new AddEditStatement().Show();
+            this.Close();
         }
     }
 }

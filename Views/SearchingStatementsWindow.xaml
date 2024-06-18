@@ -25,5 +25,13 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <Button
+            Width="56"
+            Height="64"
+            Margin="10,0,0,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Click="Button_Click"
+            Content="Create" />
     </Grid>
 </Window>

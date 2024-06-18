@@ -21,6 +21,7 @@ namespace StatementApp
             var user = DatabaseContext.Database.User.Where(u => u.Login == tbLogin.Text && u.Password == tbPassword.Text).FirstOrDefault();
             if (user != null)
             {
+                DatabaseContext.currentUser = user;
                 MessageBox.Show($"Welcome {user.FirstName} you are {user.Role.Title}");
                 new SearchingStatementsWindow(user).Show();
                 this.Close();

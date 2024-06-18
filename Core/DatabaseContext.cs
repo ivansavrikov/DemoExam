@@ -10,5 +10,7 @@ namespace StatementApp.Core
         {
             Database = new DBEntities();
         }
+
+        public static User currentUser = null;
     }
 }

@@ -1,0 +1,29 @@
+﻿<Window
+    x:Class="StatementApp.Views.AddEditStatement"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:StatementApp.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="AddEditStatement"
+    Width="1080"
+    Height="720"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Grid>
+        <Button
+            x:Name="btnAddStatement_Copy"
+            Width="98"
+            Height="74"
+            Margin="10,10,0,0"
+            Click="Button_Click"
+            Content="Create statement" />
+
+        <Button
+            x:Name="btnNavToStatementsList"
+            Width="98"
+            Height="74"
+            Content="nav to list" Margin="10,10,972,620" ButtonBase.Click="btnNavToStatementsList_Click" />
+
+    </Grid>
+</Window>

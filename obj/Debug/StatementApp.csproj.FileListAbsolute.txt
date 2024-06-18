@@ -23,3 +23,5 @@ J:\Course Four\demo\StatementApp\obj\Debug\StatementApp.exe
 J:\Course Four\demo\StatementApp\obj\Debug\StatementApp.pdb
 J:\Course Four\demo\StatementApp\obj\Debug\Views\SearchingStatementsWindow.g.cs
 J:\Course Four\demo\StatementApp\obj\Debug\Views\SearchingStatementsWindow.baml
+J:\Course Four\demo\StatementApp\obj\Debug\Views\AddEditStatement.g.cs
+J:\Course Four\demo\StatementApp\obj\Debug\Views\AddEditStatement.baml

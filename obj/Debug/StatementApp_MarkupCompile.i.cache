@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 J:\Course Four\demo\StatementApp\App.xaml
-2-674148815
+31648986605
 2-639626383
-21465988525
+22-749693531
 18593362177
-Views\LoginWindow.xaml;Views\SearchingStatementsWindow.xaml;
+Views\AddEditStatement.xaml;Views\LoginWindow.xaml;Views\SearchingStatementsWindow.xaml;
 
-False
+True
 
